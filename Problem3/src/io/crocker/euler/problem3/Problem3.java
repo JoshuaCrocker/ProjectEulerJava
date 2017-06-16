@@ -1,4 +1,4 @@
-package io.crocker.euler;
+package io.crocker.euler.problem3;
 
 /**
  * Problem 3: Largest Prime Factor
