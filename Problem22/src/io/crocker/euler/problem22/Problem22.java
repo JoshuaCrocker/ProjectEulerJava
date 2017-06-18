@@ -33,35 +33,35 @@ public class Problem22 {
 
 		problem22.ExtractNames();
 		problem22.SortNames();
-		int highest = problem22.ScoreNames();
+		long total = problem22.ScoreNames();
 		
-		System.out.println(highest);
+		System.out.println(total);
 	}
 
-	private int ScoreNames() {
-		int highest = 0;
-		int score = 1;
+	private long ScoreNames() {
+		long total = 0;
+		long score = 1;
 
 		for (int i = 0; i < this.names.size(); i++) {
-			System.out.println(this.names.get(i));
+			
+//			System.out.println(this.names.get(i));
 			score = this.getNameScore(this.names.get(i));
 			score *= (1 + i);
 			
-			if (score > highest) {
-				highest = score;
-			}
+			total += score;
 		}
 
-		return score;
+		return total;
 	}
 
-	private int getNameScore(String name) {
+	private long getNameScore(String name) {
 		String[] chars = name.split("");
-		int score = 0;
+		long score = 0;
 
 		for (String c : chars) {
 			int code = Character.codePointAt(c, 0);
-			score += code - 64;
+			score += (code - 64);
+			System.out.println(c + " " + (code - 64));
 		}
 
 		return score;
