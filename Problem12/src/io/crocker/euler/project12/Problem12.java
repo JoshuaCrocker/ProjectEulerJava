@@ -1,4 +1,4 @@
-package io.crocker.euler;
+package io.crocker.euler.project12;
 
 /**
  * Problem 12: Highly Divisible Triangular Number
@@ -25,6 +25,7 @@ public class Problem12 {
 	public static void main(String[] args) {
 		Problem12 problem12 = new Problem12();
 
+		System.out.println("d = 28: " + problem12.GetNumberWithNDivisors(5));
 		System.out.println("d = 500: " + problem12.GetNumberWithNDivisors(500));
 	}
 
@@ -41,18 +42,27 @@ public class Problem12 {
 
 			increment++;
 			
-			System.out.println(number + " " + divisors);
+//			System.out.println(number + " " + divisors);
 		}
 
 		return number;
 	}
 
 	private int getNumberOfDivisors(int number) {
-		int divisors = 0;
+		int divisors = 1;
+//		int orig = number;
+		int count = 0;
 		
-		for (int i = 1; i < number; i++) {
-			if (this.isFactor(i, number)) {
-				divisors++;
+		for (int i = 2; i <= number; i++) {
+			count  = 0;
+			
+			while (number % i == 0) {
+				number /= i;
+				count++;
+			}
+			
+			if (divisors != 0) {
+				divisors *= count;
 			}
 		}
 		
