@@ -1,5 +1,7 @@
 package io.crocker.euler.problem84;
 
+import java.util.Random;
+
 /**
  * Problem 84: Monopoly Odds
  * 
@@ -50,22 +52,40 @@ package io.crocker.euler.problem84;
  * If, instead of using two 6-sided dice, two 4-sided dice are used, find the
  * six-digit modal string.
  * 
+ * 
+ * Simulation Approach
+ * 
  * @author joshua
  *
  */
 public class Problem84 {
 
 	public static final int DICE_SIDES = 6;
+	public static final int ITERATIONS = 1000;
+	public static final Random RNG = new Random();
+	
+	private Board board = new Board();
 	
 	public static void main(String[] args) {
 		Problem84 problem84 = new Problem84();
 
-		problem84.CalculateOdds();
+		problem84.RunSimulation();
+	}
+	
+	private int roll() {
+		return Problem84.RNG.nextInt(Problem84.DICE_SIDES) + 1;
+	}
+	
+	private int roll2() {
+		return this.roll() + this.roll();
 	}
 
-	public void CalculateOdds() {
-		// TODO Auto-generated method stub
-
+	public void RunSimulation() {
+		for (int i = 0; i < Problem84.ITERATIONS; i++) {
+			this.board.move(this.roll2());
+		}
+		
+		this.board.outputProbability();
 	}
 
 }
