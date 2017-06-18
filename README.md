@@ -18,3 +18,4 @@ My Java solutions to [Project Euler](https://projecteuler.net).
 * Problem 8
 * Problem 9
 * Problem 10
+* Problem 14
