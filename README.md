@@ -6,6 +6,7 @@ My Java solutions to [Project Euler](https://projecteuler.net).
 
 ### In Progress
 * Problem 12
+* Problem 84
 
 ### Completed
 * Problem 1
