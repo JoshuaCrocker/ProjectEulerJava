@@ -60,8 +60,8 @@ import java.util.Random;
  */
 public class Problem84 {
 
-	public static final int DICE_SIDES = 6;
-	public static final int ITERATIONS = 1000;
+	public static final int DICE_SIDES = 4;
+	public static final int ITERATIONS = 100000;
 	public static final Random RNG = new Random();
 	
 	private Board board = new Board();
@@ -82,6 +82,7 @@ public class Problem84 {
 
 	public void RunSimulation() {
 		for (int i = 0; i < Problem84.ITERATIONS; i++) {
+			System.out.println("Iteration " + i + " / " + Problem84.ITERATIONS);
 			this.board.move(this.roll2());
 		}
 		

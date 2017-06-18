@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Board {
 	private ArrayList<BoardSpace> spaces = new ArrayList<BoardSpace>();
 	private int currentSpace = 0;
-	
+
 	public Board() {
 		this.spaces.add(new BoardSpace("GO", "00"));
 		this.spaces.add(new BoardSpace("A1", "01"));
@@ -48,12 +48,95 @@ public class Board {
 		this.spaces.add(new BoardSpace("T2", "38"));
 		this.spaces.add(new BoardSpace("H2", "39"));
 	}
-	
+
 	public void move(int spaces) {
 		this.currentSpace = (this.currentSpace + spaces) % 40;
+
+		// Space Actions
+		this.checkSpaceActions();
+
 		this.spaces.get(this.currentSpace).incrementLandings();
 	}
-	
+
+	private void checkSpaceActions() {
+		BoardSpace space = this.spaces.get(this.currentSpace);
+
+		if (space.getSpaceCode().equals("G2J")) {
+			this.currentSpace = 10;
+		}
+
+		if (space.getSpaceCode().equals("CC1") || space.getSpaceCode().equals("CC2")
+				|| space.getSpaceCode().equals("CC3")) {
+			int card = Problem84.RNG.nextInt(16);
+
+			if (card == 0) {
+				// GO
+				this.currentSpace = 0;
+			}
+
+			if (card == 1) {
+				// JAIL
+				this.currentSpace = 10;
+			}
+		}
+
+		if (space.getSpaceCode().equals("CH1") || space.getSpaceCode().equals("CH2")
+				|| space.getSpaceCode().equals("CH3")) {
+			int card = Problem84.RNG.nextInt(16);
+
+			if (card == 0) {
+				// GO
+				this.currentSpace = 0;
+			}
+
+			if (card == 1) {
+				// JAIL
+				this.currentSpace = 10;
+			}
+
+			if (card == 2) {
+				this.currentSpace = 11;
+			}
+
+			if (card == 3) {
+				this.currentSpace = 24;
+			}
+
+			if (card == 4) {
+				this.currentSpace = 39;
+			}
+
+			if (card == 5) {
+				this.currentSpace = 5;
+			}
+
+			if (card == 6) {
+				this.currentSpace -= 3;
+
+				if (this.currentSpace < 0) {
+					this.currentSpace = 40 + this.currentSpace;
+				}
+			}
+
+			if (card == 7 || card == 8) {
+				// RAILWAY
+				while (!space.getSpaceCode().equals("R1") && !space.getSpaceCode().equals("R2")
+						&& !space.getSpaceCode().equals("R3") && !space.getSpaceCode().equals("R4")) {
+					this.currentSpace = (this.currentSpace + 1) % 40;
+					space = this.spaces.get(this.currentSpace);
+				}
+			}
+
+			if (card == 9) {
+				// UTILITY
+				while (!space.getSpaceCode().equals("U1") && !space.getSpaceCode().equals("U2")) {
+					this.currentSpace = (this.currentSpace + 1) % 40;
+					space = this.spaces.get(this.currentSpace);
+				}
+			}
+		}
+	}
+
 	public void outputProbability() {
 		for (BoardSpace sp : this.spaces) {
 			System.out.println(sp.getSpaceCode() + " " + sp.getProbabilityFormat());

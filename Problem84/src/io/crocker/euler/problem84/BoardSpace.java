@@ -49,14 +49,11 @@ public class BoardSpace {
 	}
 	
 	public float getProbabilityFormat() {
-		return ((this.getProbability() * 100));
+		return (float) (this.getLanded() * 100) / (float) Problem84.ITERATIONS;
 	}
 	
 	public void incrementLandings() {
 		this.landed++;
 		this.calculateProbability();
-		
-		System.out.println(this.spaceCode);
-		System.out.println(this.getLanded());
 	}
 }
