@@ -41,7 +41,13 @@ public class Problem96 {
 		Problem96 problem96 = new Problem96();
 
 		problem96.ExtractPuzzles();
+		
 		problem96.PrintPuzzles();
+		
+		for (Sudoku p : this.puzzles) {
+			p.solve();
+		}
+		
 	}
 
 	public void ExtractPuzzles() {
